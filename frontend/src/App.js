@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id='page'>
+      {/* Below this will be the search bar, where the user will input the country */}
+    <section className="searchBar">
+        <h3 id='greetings'>Greetings! Search your country!</h3>
+        <input id='search' type='text' placeholder="Type your string"/>
+    </section>
+    {/* After this button is pressed, the country will be processed, then the information will be displayed */}
+    <button id='btn'>Search</button>
+    {/* Below here, in the article section, info about the country will be placed */}
+    <article id='info-page'>
+      <section id='info-header'> 
+        <h1>Country Name</h1>
+        <img alt='flag of country'/>
+      </section>
+    </article>
     </div>
   );
 }
