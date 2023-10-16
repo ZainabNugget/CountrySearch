@@ -8,7 +8,8 @@ function App() {
     console.log(userString)//to check if it works 
   };
   //put endpoint into variable
-  const api_url = `/api/`;
+  //add into the api url 
+  const api_url = `/api/` + userString; 
 
   //Getting the data from the api and set into a const
   const [countryData, setCountryData] = useState(null);
