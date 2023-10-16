@@ -8,10 +8,8 @@ React, Node.js, Express
 Languages used: HTML, CSS and JS
 
 ## Table of Contents:
-- Installation
-- Usage
-- Contributing
-- License
+- [Installation](README.md#Installation)
+- [Usage](README.md#Usage)
 
 ## Installation
 - Download this zip folder
