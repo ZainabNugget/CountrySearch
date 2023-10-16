@@ -1,6 +1,27 @@
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+    //put endpoint into variable
+    const api_url = `/api/`;
+  
+    //Getting the data from the api and set into a const
+    const [countryData, setCountryData] = useState(null);
+    //Call this method to get API data
+    const fetchData = async () => {
+      try { //try fetching api response
+        const response = await fetch(api_url); 
+        if (!response.ok) { //if its not fetching respond with error
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json(); //put all data into this variable
+        setCountryData(data); //set it into this data variable
+  
+      } catch (error) {
+        console.error('Error:', error); //print out any occuring errors :)
+      }
+    };
+  
   return (
     <div id='page'>
       {/* Below this will be the search bar, where the user will input the country */}
@@ -9,7 +30,7 @@ function App() {
         <input id='search' type='text' placeholder="Type your string"/>
     </section>
     {/* After this button is pressed, the country will be processed, then the information will be displayed */}
-    <button id='btn'>Search</button>
+    <button id='btn' onClick={fetchData}>Search</button>
     {/* Below here, in the article section, info about the country will be placed */}
     <article id='info-page'>
       <section id='info-header'> 
