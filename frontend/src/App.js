@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import InformationPage from './components/InformationPage';
 
 function App() {
   const [userString, setUserString] = useState(''); //set the string from the user into variable
@@ -8,8 +9,7 @@ function App() {
   };
   //put endpoint into variable
   //add into the api url 
-  const api_url = `/api/` + userString; 
-
+  const api_url = `/api/` + userString;
   //Getting the data from the api and set into a const
   const [countryData, setCountryData] = useState(null);
   //Call this method to get API data
@@ -26,14 +26,10 @@ function App() {
     }
   };
 
-  function cleanse(data) {
-    return data.replaceAll('{',' ').replaceAll('}',' ').replaceAll('"',' ');
-  }
-
   return (
     <div id='page'>
       {/* Below this will be the search bar, where the user will input the country */}
-        <section id="searchBar" >
+      <section id="searchBar">
         <h3 id='greetings' className='flex-row'>Greetings! Search your country!</h3>
         <div id='earth'></div>
         <input
@@ -43,41 +39,42 @@ function App() {
           onChange={handleChange}
           className='z99'
           placeholder="Type Your Country" />
-          {/* After this button is pressed, the country will be processed, then the information will be displayed */}
+        {/* After this button is pressed, the country will be processed, then the information will be displayed */}
         <button id='btn' onClick={fetchData}>Search</button>
       </section>
       {/* Below here, in the article section, info about the country will be placed */}
-      {/* <p>We found {countryData.length} result(s)</p> */}
+      {(countryData === null ? (
+        <p></p>
+      ) : (
+        <p className='flex-row'>we found {countryData.length} results</p>
+      ))}
+      
+      <div id='slider'>
       {Array.isArray(countryData) && countryData.length > 0 ? (
         (countryData.map((data, index) => (
-          <article id='info-page' className='flex-col' key={index} >
-          <section id='info-header' className='flex-col'>
-            <h1>{data.name.common}</h1>
-            <img alt='flag of country' src={data.flags["png"]}/>
-          </section>
-          <section id='general-info' className=''>
-          <p id='text'>~ Other ways of naming this country are {data.altSpellings+ " "} 
-          <br />~ The capital of {data.name.common} is {data.capital} with a population of: {data.population} people... 
-          <br/>~ It is located in {data.region}, In the subregion {data.subregion} 
-          <br/>~ {data.flags["alt"]}
-          <br/>~ The week starts on a {data.startOfWeek} 
-          <br />~ The currencies of this country: {cleanse(JSON.stringify(data.currencies))}, 
-          <br/>~ Languages that this country speak, {cleanse(JSON.stringify(data.languages))}
-          <br/>~ 
-            {data.independent ? (
-                <span>This country is independent</span>
-            ):(
-              <span>This country is not independent</span>
-            )}
-            <br/>For more information on this country, follow the <a href={'https://en.wikipedia.org/wiki/'+data.name.common} >wikipedia page</a>!
-            </p>
-            <img id='img' src={data.coatOfArms["png"]}/>
-          </section>
-        </article>
-      )))
-      ):(
-        <p className='flex-row'>Try searching for a country!</p>
+          <article id='info-page' className='flex-row'  key={index}>
+          <InformationPage
+           index = {index}
+            name={data.name.common}
+            capital={data.capital}
+            region={data.region}
+            subregion={data.subregion}
+            population={data.population}
+            coatOfArms={data.coatOfArms["png"]}
+            flags={data.flags["png"]}
+            alt={data.flags["alt"]}
+            official={data.name.official}
+            currencies ={data.currencies}
+            languages = {data.languages}
+            altSpellings = {data.altSpellings}
+            startOfWeek={data.startOfWeek}
+          />
+          </article>
+        )))
+      ) : (
+        <p className='flex-row'></p>
       )}
+    </div>
     </div>
   );
 }
