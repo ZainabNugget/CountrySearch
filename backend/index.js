@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 //Set the port to 5001
 const PORT = process.env.PORT || 5001;
+const path = require('path');
+
+app.use(express.static(path.join(__dirname + "/public")));
 //Place url into a const variable
 //Changing the api url to be more specific
 const url ='https://restcountries.com/v3.1/name/' 
