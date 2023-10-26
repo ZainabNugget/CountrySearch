@@ -5,7 +5,7 @@ This project allows a user to search up a country, if valid, information about t
 [CountrySearch](https://countrysearch-8033619c0be6.herokuapp.com/)
 -Used Heroku to deploy website.
 
-## Frameworks used
+## Libraries used
 React, Node.js, Express
 Languages used: HTML, CSS and JS
 
